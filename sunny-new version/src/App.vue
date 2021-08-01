@@ -46,7 +46,7 @@
 
       <!-- 非热评 -->
       <div id="other-comments">
-        <h2 class="white-words">|其他评论</h2>
+        <h2 class="white-words">|评论回忆</h2>
         <div id="comments-detail">
           <div
             id="comments-item"
@@ -70,7 +70,7 @@
     </div>
 
     <!-- 加载更多 -->
-    <div id="more">
+    <div id="more" v-show="!noMore">
       <h3 class="white-words" @click="getData">加载更多</h3>
     </div>
 
@@ -90,7 +90,7 @@ export default {
     return {
       hotComments: [],
       otherComments: [],
-      limit: 30,
+      limit: 40,
       offset: 0,
       noMore: false,
     };
