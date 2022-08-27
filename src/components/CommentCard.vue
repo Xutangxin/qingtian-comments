@@ -83,6 +83,7 @@ export default {
   text-align: right;
 }
 .comments-item .comment-info .user p {
+  margin: 0;
   text-align: left;
 }
 </style>
