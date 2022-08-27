@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="container">
     <div class="title">
       <h1 class="white-text">-晴天の网易云评论-</h1>
     </div>
@@ -18,50 +18,23 @@
     <div class="comments">
       <div class="hot-comments">
         <h2 class="white-text">|热评 TOP15</h2>
-
         <div class="comments-detail">
-          <div
-            class="comments-item"
-            v-for="item in hotComments"
-            :key="item.commentId"
-          >
-            <div class="img">
-              <img :src="item.user.avatarUrl" alt />
-            </div>
-            <div class="comment-info">
-              <div class="text">{{ item.content }}</div>
-              <div class="user">
-                <p>
-                  {{ item.user.nickname }}
-                </p>
-                <p>
-                  {{ timestampToTime(item.time) }}
-                </p>
-              </div>
-            </div>
-          </div>
+          <comment-card
+            v-for="(item, index) in hotComments"
+            :key="index"
+            :data="item"
+          ></comment-card>
         </div>
       </div>
 
       <div class="other-comments">
         <h2 class="white-text">|评论回忆</h2>
         <div class="comments-detail">
-          <div
-            class="comments-item"
-            v-for="item in otherComments"
-            :key="item.commentId"
-          >
-            <div class="img">
-              <img :src="item.user.avatarUrl" alt />
-            </div>
-            <div class="comment-info">
-              <div class="text">{{ item.content }}</div>
-              <div class="user">
-                <p>{{ item.user.nickname }}</p>
-                <p>{{ timestampToTime(item.time) }}</p>
-              </div>
-            </div>
-          </div>
+          <comment-card
+            v-for="(item, index) in otherComments"
+            :key="index"
+            :data="item"
+          ></comment-card>
         </div>
       </div>
     </div>
@@ -76,9 +49,13 @@
 
 <script>
 import axios from 'axios';
+import CommentCard from '../components/CommentCard.vue';
 export default {
+  components: { CommentCard },
   name: 'CommentsView',
-
+  comments: {
+    CommentCard
+  },
   data() {
     return {
       hotComments: [],
@@ -89,17 +66,11 @@ export default {
     };
   },
 
-  methods: {
-    //将时间戳转换为 年-月-日 的格式
-    timestampToTime(timestamp) {
-      const date = new Date(timestamp);
-      const year = date.getFullYear();
-      const m = date.getMonth() + 1;
-      const month = m < 10 ? '0' + m : m;
-      const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-      return `${year}-${month}-${day}`;
-    },
+  created() {
+    this.getData();
+  },
 
+  methods: {
     async getData() {
       if (this.noMore) return;
       const res = await axios({
@@ -123,10 +94,6 @@ export default {
         this.offset += this.limit;
       }
     }
-  },
-
-  created() {
-    this.getData();
   }
 };
 </script>
@@ -148,7 +115,7 @@ body {
   color: #fff;
 }
 
-.main {
+.container {
   min-width: 1000px;
   padding: 20px;
   background: #c82e35;
@@ -182,57 +149,6 @@ body {
   justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
-}
-
-.comments-item {
-  display: flex;
-  width: 19%;
-  height: fit-content;
-  margin-bottom: 8px;
-  padding: 5px;
-  background: #ffff;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: default;
-  transition: 0.2s;
-}
-.comments-item:hover {
-  box-shadow: #fff 0 0 18px;
-}
-
-.comments-item .img {
-  flex: 1;
-  text-align: center;
-}
-.img img {
-  width: 60%;
-  margin: 5px auto 0;
-  border-radius: 50%;
-}
-
-.comments-item .comment-info {
-  flex: 3;
-  padding: 5px;
-}
-
-.comment-info .text {
-  font-size: 14px;
-}
-
-.comments-item .comment-info .user {
-  margin-top: 3px;
-  color: #b2b1b2;
-  font-size: 12px;
-  text-align: right;
-}
-.comments-item .comment-info .user p {
-  text-align: left;
-}
-.end {
-  width: 20%;
-  height: 30px;
-  margin: 20px auto 0;
-  text-align: center;
 }
 
 .load-more {
