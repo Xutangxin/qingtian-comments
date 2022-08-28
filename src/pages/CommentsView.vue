@@ -6,7 +6,7 @@
 
     <div class="video">
       <iframe
-        src="http://player.bilibili.com/player.html?aclass=328746951&bvclass=BV1VA411e7PM&cclass=208118542&page=1"
+        src="https://www.bilibili.com/video/BV1Yv4y1Z7km?spm_id_from=333.337.search-card.all.click&vd_source=f597b496d3bd92bba0b88a4aab875720"
         scrolling="no"
         border="0"
         frameborder="no"
@@ -106,7 +106,6 @@ export default {
 }
 
 body {
-  background: #c82e35;
   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
@@ -118,7 +117,7 @@ body {
 .container {
   min-width: 1000px;
   padding: 20px;
-  background: #c82e35;
+  background: #ff3333c2;
   border-radius: 10px;
 }
 
@@ -129,7 +128,7 @@ body {
 }
 
 .video {
-  width: 45%;
+  width: 50%;
   height: 430px;
   margin: 0 auto 10px;
   padding: 0;
@@ -137,6 +136,7 @@ body {
 .video iframe {
   width: 100%;
   height: 100%;
+  border-radius: 5px;
 }
 
 .hot-comments h2,
@@ -169,6 +169,6 @@ body {
 .load-more span:not(.no-more):hover {
   font-weight: 600;
   background: #fff;
-  color: #c82e35;
+  color: #ff3333c2;
 }
 </style>
