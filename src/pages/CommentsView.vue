@@ -6,7 +6,7 @@
 
     <div class="video">
       <iframe
-        src="https://www.bilibili.com/video/BV1Yv4y1Z7km?spm_id_from=333.337.search-card.all.click&vd_source=f597b496d3bd92bba0b88a4aab875720"
+        src="https://www.bilibili.com/video/BV1Yv4y1Z7km/?spm_id_from=333.337.search-card.all.click&vd_source=f597b496d3bd92bba0b88a4aab875720"
         scrolling="no"
         border="0"
         frameborder="no"
@@ -40,9 +40,9 @@
     </div>
 
     <div class="load-more" @click="getData">
-      <span :class="{ 'no-more': noMore }">{{
-        noMore ? '没有更多了哦' : '加载更多'
-      }}</span>
+      <div :class="{ 'no-more': noMore }">
+        {{ noMore ? '没有更多了哦' : '加载更多' }}
+      </div>
     </div>
   </div>
 </template>
@@ -117,8 +117,11 @@ body {
 .container {
   min-width: 1000px;
   padding: 20px;
-  background: #ff3333c2;
-  border-radius: 10px;
+  background-image: linear-gradient(
+    to bottom right,
+    #ff3333c2,
+    rgb(236, 236, 144)
+  );
 }
 
 .title {
@@ -155,19 +158,20 @@ body {
   margin: 20px auto 0;
   text-align: center;
 }
-.load-more span {
+.load-more div {
+  width: fit-content;
+  margin: 0 auto;
   cursor: pointer;
-  border: 1px solid lightgray;
   border-radius: 5px;
   color: #fff;
   padding: 8px 14px;
   transition: 0.3s;
+  font-weight: 600;
 }
-.load-more span.no-more {
+.load-more div.no-more {
   cursor: default;
 }
-.load-more span:not(.no-more):hover {
-  font-weight: 600;
+.load-more div:not(.no-more):hover {
   background: #fff;
   color: #ff3333c2;
 }
